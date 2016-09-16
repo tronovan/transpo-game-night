@@ -4,7 +4,7 @@
 # Here I have the 311_Unified_Data.csv file in a folder called ~/Data/
 #  set working directory and read csv
 
-setwd("~/Data2/")
+setwd("~/Data/")
 d<-read.csv('311_Unified_Data.csv')
 
 #  Here I'm getting rid of a bunch of columns since we're not using them.
