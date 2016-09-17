@@ -1,5 +1,5 @@
 # set working directory
-setwd('~/Data2/')
+setwd('~/Data/')
 
 # THis sets how many decimal points get printed.
 # This is needed so gps coords don't get rounded 
