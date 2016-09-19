@@ -42,8 +42,8 @@ d$Approx....of.Funds.Leveraged <- NULL
 #  gsub works like a find replace to remove '(' and ','
 #  the parenthese need to be escaped twice
 
-d$longitude<-gsub(",","",gsub("\\(", "", str_extract(d$Location.1, "\\(.*,")))
-d$latitude<-gsub(", ", "", gsub("\\)", "", str_extract(d$Location.1, ",.*\\)")))
+d$latitude<-gsub(",","",gsub("\\(", "", str_extract(d$Location.1, "\\(.*,")))
+d$longitude<-gsub(", ", "", gsub("\\)", "", str_extract(d$Location.1, ",.*\\)")))
 
 # write file in the ~/Data directory 
 write.csv(d, file="Minified_Affordable_Housing_Inventory.csv", row.names = F)
