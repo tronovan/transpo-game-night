@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title>
+        Affordable Housing
+    </title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+
+<body>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope, $http) {
+
+            $scope.queryData = function() {
+
+                $http.get('https://data.austintexas.gov/resource/3cke-ti8n.json?$where=within_circle(location_1, ' + $scope.longitude + ', ' + $scope.latitude + ', ' + $scope.spread + ')')
+                    .then(function(response) {
+                        $scope.myData = response.data;
+                    });
+            };
+
+
+        });
+
+    </script>
+
+
+    <div ng-app="myApp" ng-controller="myCtrl">
+
+        <p>Enter the longitude, longitude and latitude for the area to query.</p>
+
+        longitude
+        <input ng-model="longitude">
+        <br> latitude
+        <input ng-model="latitude">
+        <br> spread
+        <input ng-model="spread">
+        <br>
+        <button ng-click=queryData()>query DB</button>
+
+
+        <p>Here you can put try the following longitude and latitudes. Try a spread of about 500</p>
+
+
+        30.13936343,-97.77151173 rundberg_lamar
+        <br> 30.31206778,-97.71534628 airport_51
+        <br> 30.35615096,-97.73090442 burnet_anderson
+        <br> 30.28172985,-97.74192973 guadalupe_mlk
+        <br> 30.26085944,-97.7585309 lamar_bartonsprings
+        <br> 30.23367751,-97.7234957 riverside_pleasantvalley
+        <br> 30.25341885,-97.60359279 fm969_sh130
+        <br>
+
+        <hr>
+        <br>
+        <br>
+
+        <div>
+            <label>Search:
+                <input ng-model="searchText">
+            </label>
+            <hr>
+            <table id="searchTextResults">
+                <th>name</th>
+                <th>address</th>
+                <th>total_units</th>
+                <th>own_rent</th>
+                <tr ng-repeat="d in myData | filter:searchText">
+                    <td>{{d.name}}</td>
+                    <td>{{d.address}}</td>
+                    <td>{{d.total_units}}</td>
+                    <td>{{d.own_rent}}</td>
+                </tr>
+            </table>
+            <hr>
+        </div>
+    </div>
+
+</body>
+
+</html>
